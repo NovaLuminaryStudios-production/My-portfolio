@@ -1,0 +1,1033 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09070f">
+<title>Official_Baguette | Game Developer</title>
+
+<style>
+:root {
+    --bg: #09070f;
+    --panel: #151020;
+    --purple: #a78bfa;
+    --purple-dark: #7c3aed;
+    --text: #f4f0ff;
+    --muted: #aaa0bb;
+    --border: rgba(190,166,255,.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 80% 0%, rgba(124,58,237,.16), transparent 40%),
+        radial-gradient(ellipse at 0% 50%, rgba(91,33,182,.09), transparent 35%);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: min(1120px, calc(100% - 44px));
+    margin: auto;
+}
+
+/* NAVIGATION */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(9,7,15,.85);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+}
+
+nav {
+    height: 76px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-weight: 850;
+    font-size: 15px;
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    background: linear-gradient(145deg,#c4b5fd,#7c3aed);
+    color: #10091f;
+    font-weight: 950;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.nav-button,
+.button {
+    padding: 11px 17px;
+    border-radius: 10px;
+    border: 1px solid rgba(196,181,253,.3);
+    background: rgba(139,92,246,.13);
+    font-size: 13px;
+    font-weight: 750;
+    transition: .25s;
+}
+
+.nav-button:hover,
+.button:hover {
+    background: rgba(139,92,246,.28);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(124,58,237,.2);
+}
+
+.menu-button {
+    display: none;
+    color: white;
+    background: none;
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 680px;
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    align-items: center;
+    gap: 45px;
+    padding-top: 70px;
+    padding-bottom: 90px;
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #c4b5fd;
+    font-size: 12px;
+    font-weight: 850;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 15px var(--purple);
+}
+
+h1 {
+    font-size: clamp(48px,7vw,82px);
+    line-height: 1;
+    letter-spacing: -5px;
+    margin: 24px 0;
+}
+
+.gradient {
+    background: linear-gradient(100deg,#fff,#c4b5fd,#8b5cf6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero-description {
+    max-width: 590px;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 30px;
+}
+
+.primary {
+    background: linear-gradient(120deg,#a78bfa,#7c3aed);
+    color: #10091f;
+    border: none;
+}
+
+.secondary {
+    background: rgba(255,255,255,.025);
+    color: white;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 35px;
+    margin-top: 40px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.hero-stats strong {
+    display: block;
+    color: white;
+    font-size: 14px;
+}
+
+/* HERO VISUAL */
+
+.visual {
+    min-height: 380px;
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+
+.orb {
+    width: min(320px,75vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid rgba(196,181,253,.25);
+    background: radial-gradient(circle at 35% 30%,
+        rgba(196,181,253,.25),
+        rgba(124,58,237,.12) 45%,
+        transparent 75%);
+    box-shadow: 0 0 100px rgba(124,58,237,.14);
+    display: grid;
+    place-items: center;
+    position: relative;
+}
+
+.orb::before,
+.orb::after {
+    content: "";
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(196,181,253,.17);
+    border-radius: 50%;
+    transform: rotateX(65deg) rotate(-25deg);
+}
+
+.orb::after {
+    inset: -25px;
+    transform: rotateX(65deg) rotate(35deg);
+}
+
+.monogram {
+    font-size: 105px;
+    font-weight: 950;
+    color: #e9ddff;
+    text-shadow: 0 0 50px rgba(167,139,250,.7);
+    letter-spacing: -10px;
+}
+
+.float-card {
+    position: absolute;
+    padding: 13px 17px;
+    background: rgba(20,15,32,.92);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 11px;
+    color: var(--muted);
+    backdrop-filter: blur(12px);
+}
+
+.float-card strong {
+    display: block;
+    color: white;
+    font-size: 13px;
+}
+
+.float-one {
+    top: 50px;
+    right: 0;
+}
+
+.float-two {
+    bottom: 45px;
+    left: 0;
+}
+
+/* GENERAL SECTIONS */
+
+section {
+    padding: 95px 0;
+    border-top: 1px solid rgba(190,166,255,.09);
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.kicker {
+    color: #b9a4f7;
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: clamp(30px,4vw,43px);
+    letter-spacing: -1.7px;
+    line-height: 1.15;
+    margin-top: 8px;
+}
+
+.section-description {
+    color: var(--muted);
+    font-size: 13px;
+    max-width: 460px;
+}
+
+/* ABOUT */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 22px;
+}
+
+.panel {
+    background: linear-gradient(145deg,rgba(23,18,38,.9),rgba(15,12,23,.95));
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 27px;
+}
+
+.panel h3 {
+    font-size: 17px;
+}
+
+.panel p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+    margin-top: 12px;
+}
+
+.focus-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.focus-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ded6ed;
+    font-size: 13px;
+}
+
+.check {
+    width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: rgba(139,92,246,.17);
+    color: #c4b5fd;
+}
+
+/* SKILLS */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 13px;
+}
+
+.skill {
+    padding: 20px;
+    min-height: 110px;
+    background: rgba(20,15,32,.75);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    transition: .25s;
+}
+
+.skill:hover {
+    transform: translateY(-5px);
+    border-color: rgba(167,139,250,.5);
+}
+
+.skill-icon {
+    font-size: 20px;
+    color: #c4b5fd;
+    margin-bottom: 10px;
+}
+
+.skill strong {
+    display: block;
+    font-size: 13px;
+}
+
+.skill span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* WHAT I DO */
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 14px;
+}
+
+.service {
+    min-height: 180px;
+    transition: .25s;
+}
+
+.service:hover {
+    transform: translateY(-5px);
+    border-color: rgba(167,139,250,.45);
+    background: linear-gradient(145deg,#1b1430,#100d1a);
+}
+
+.service-icon {
+    width: 39px;
+    height: 39px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    color: #d7c6ff;
+    background: rgba(139,92,246,.16);
+    font-size: 18px;
+    margin-bottom: 19px;
+}
+
+.service h3 {
+    font-size: 15px;
+}
+
+.service p {
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* CONTACT */
+
+.contact-box {
+    padding: 45px;
+    border-radius: 20px;
+    border: 1px solid rgba(196,181,253,.23);
+    background:
+        radial-gradient(ellipse at 85% 0%,rgba(124,58,237,.23),transparent 45%),
+        linear-gradient(140deg,#171126,#0f0b18);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.contact-box p {
+    max-width: 550px;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.discord-name {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.discord-name strong {
+    color: #ded2ff;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 28px 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* ANIMATIONS */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .65s ease,transform .65s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:780px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        padding: 22px;
+        background: #100c19;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-button {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding-top: 60px;
+        gap: 20px;
+    }
+
+    .visual {
+        min-height: 330px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading {
+        display: block;
+    }
+
+    .section-description {
+        margin-top: 14px;
+    }
+
+    .contact-box {
+        display: block;
+        padding: 30px;
+    }
+
+    .contact-links {
+        margin-top: 22px;
+    }
+
+    h1 {
+        letter-spacing: -3px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    html { scroll-behavior: auto; }
+    *,*::before,*::after {
+        transition-duration: .01ms !important;
+    }
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<div class="navbar">
+<nav class="container">
+
+    <a href="#home" class="logo">
+        <span class="logo-icon">B</span>
+        <span>Official_Baguette<span style="color:#a78bfa">.</span></span>
+    </a>
+
+    <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#services">What I Do</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <a href="#contact" class="nav-button">Let's connect ↗</a>
+
+    <button class="menu-button" id="menuButton">☰</button>
+
+</nav>
+</div>
+
+<main>
+
+<!-- HOME -->
+
+<header class="container hero" id="home">
+
+    <div>
+
+        <div class="eyebrow">
+            <span class="dot"></span>
+            Roblox Game Developer · Scripter
+        </div>
+
+        <h1>
+            Building worlds.<br>
+            <span class="gradient">Creating experiences.</span>
+        </h1>
+
+        <p class="hero-description">
+            I'm <strong style="color:white">Official_Baguette</strong>,
+            an intermediate Roblox game developer focused on scripting
+            and building the systems that bring interactive experiences to life.
+            I enjoy turning ideas into functional features through Luau
+            and Roblox Studio.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#skills" class="button primary">Explore my skills ↗</a>
+            <a href="#contact" class="button secondary">Get in touch</a>
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <strong>Intermediate</strong>
+                Experience level
+            </div>
+
+            <div>
+                <strong>Luau</strong>
+                Main language
+            </div>
+
+            <div>
+                <strong>Roblox Studio</strong>
+                Development platform
+            </div>
+        </div>
+
+    </div>
+
+    <div class="visual">
+
+        <div class="orb">
+            <div class="monogram">B.</div>
+        </div>
+
+        <div class="float-card float-one">
+            <strong>Roblox Studio</strong>
+            Building with Luau
+        </div>
+
+        <div class="float-card float-two">
+            <strong>Game Development</strong>
+            Ideas into experiences
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ABOUT -->
+
+<section id="about">
+<div class="container">
+
+    <div class="section-heading reveal">
+
+        <div>
+            <div class="kicker">01 / ABOUT</div>
+            <h2>A developer who loves<br>making things work.</h2>
+        </div>
+
+        <p class="section-description">
+            Focused on the scripting and logic behind interactive
+            Roblox experiences.
+        </p>
+
+    </div>
+
+    <div class="about-grid">
+
+        <article class="panel reveal">
+
+            <h3>Hey, I'm Official_Baguette.</h3>
+
+            <p>
+                I'm an intermediate Roblox game developer and scripter
+                working with Luau and Roblox Studio.
+            </p>
+
+            <p>
+                I enjoy creating different types of game features,
+                interactive interfaces, player progression systems,
+                and tools that improve the overall player experience.
+            </p>
+
+            <p>
+                I'm constantly learning, experimenting, and improving
+                my scripting abilities with every project.
+            </p>
+
+        </article>
+
+        <article class="panel reveal">
+
+            <h3>My Development Approach</h3>
+
+            <div class="focus-list">
+
+                <div class="focus-item">
+                    <span class="check">✓</span>
+                    Learning and improving scripting
+                </div>
+
+                <div class="focus-item">
+                    <span class="check">✓</span>
+                    Building useful game features
+                </div>
+
+                <div class="focus-item">
+                    <span class="check">✓</span>
+                    Writing and debugging scripts
+                </div>
+
+                <div class="focus-item">
+                    <span class="check">✓</span>
+                    Improving player experiences
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+</div>
+</section>
+
+<!-- SKILLS -->
+
+<section id="skills">
+<div class="container">
+
+    <div class="section-heading reveal">
+
+        <div>
+            <div class="kicker">02 / SKILLS</div>
+            <h2>My development toolkit.</h2>
+        </div>
+
+        <p class="section-description">
+            The tools and scripting areas I work with as a Roblox developer.
+        </p>
+
+    </div>
+
+    <div class="skills-grid">
+
+        <div class="skill reveal">
+            <div class="skill-icon">⌘</div>
+            <strong>Luau</strong>
+            <span>Scripting language</span>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">◈</div>
+            <strong>Roblox Studio</strong>
+            <span>Game development</span>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">▣</div>
+            <strong>UI Scripting</strong>
+            <span>Interactive interfaces</span>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">◉</div>
+            <strong>DataStores</strong>
+            <span>Player data and saving</span>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">✦</div>
+            <strong>Game Systems</strong>
+            <span>Features and progression</span>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">⚙</div>
+            <strong>Server / Client</strong>
+            <span>RemoteEvents and logic</span>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">⌁</div>
+            <strong>Debugging</strong>
+            <span>Testing and fixing scripts</span>
+        </div>
+
+        <div class="skill reveal">
+            <div class="skill-icon">◇</div>
+            <strong>Game Development</strong>
+            <span>Roblox experience creation</span>
+        </div>
+
+    </div>
+</div>
+</section>
+
+<!-- WHAT I DO -->
+
+<section id="services">
+<div class="container">
+
+    <div class="section-heading reveal">
+
+        <div>
+            <div class="kicker">03 / WHAT I DO</div>
+            <h2>Building the systems<br>that run a game.</h2>
+        </div>
+
+        <p class="section-description">
+            Roblox scripting focused on useful in-game features,
+            reliable data, and clear player interfaces.
+        </p>
+
+    </div>
+
+    <div class="services">
+
+        <article class="panel service reveal">
+
+            <div class="service-icon">▤</div>
+
+            <h3>UI & Interface Scripting</h3>
+
+            <p>
+                In-game menus, HUDs, shops, title displays,
+                settings, and interactive player interfaces.
+            </p>
+
+        </article>
+
+        <article class="panel service reveal">
+
+            <div class="service-icon">◈</div>
+
+            <h3>Player Data & Progression</h3>
+
+            <p>
+                Player stats, leaderboards, saving systems,
+                currencies, rewards, and progression features.
+            </p>
+
+        </article>
+
+        <article class="panel service reveal">
+
+            <div class="service-icon">⚙</div>
+
+            <h3>Game Features & Tools</h3>
+
+            <p>
+                Admin tools, title systems, developer product handling,
+                redeem codes, and other game features.
+            </p>
+
+        </article>
+
+    </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+<div class="container">
+
+    <div class="contact-box reveal">
+
+        <div>
+
+            <div class="kicker">04 / CONTACT</div>
+
+            <h2>Have something in mind?</h2>
+
+            <p>
+                Interested in connecting with other developers,
+                discussing Roblox development, or working together?
+                Feel free to reach out.
+            </p>
+
+        </div>
+
+        <div>
+
+            <div class="contact-links">
+
+                <a class="button primary"
+                   href="https://www.roblox.com/users/profile?username=the_rinitoshixsae"
+                   target="_blank"
+                   rel="noopener">
+                    Roblox ↗
+                </a>
+
+                <a class="button secondary"
+                   href="https://discord.com/users/1505258680000581777"
+                   target="_blank"
+                   rel="noopener">
+                    Discord ↗
+                </a>
+
+            </div>
+
+            <div class="discord-name">
+                Discord: <strong>ball4all</strong>
+                · Display name: <strong>𝓡𝓔𝓐𝓟𝓔𝓡</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+<div class="container footer-inner">
+
+    <span>
+        © <span id="year"></span> Official_Baguette.
+        All rights reserved.
+    </span>
+
+    <span>Roblox Game Developer · Scripter</span>
+
+    <span>@the_rinitoshixsae</span>
+
+</div>
+</footer>
+
+<script>
+
+const menuButton = document.getElementById("menuButton");
+const navLinks = document.getElementById("navLinks");
+
+menuButton.addEventListener("click", () => {
+    navLinks.classList.toggle("open");
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+    });
+});
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+        }
+
+    });
+
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
+});
+
+</script>
+
+</body>
+</html>
